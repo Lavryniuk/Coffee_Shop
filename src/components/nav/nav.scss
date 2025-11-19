@@ -1,0 +1,46 @@
+.navbar {
+  width: 360px;
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    list-style: none;
+    padding: 0;
+
+    li {
+      .nav_logo {
+        width: 35px;
+        height: 35px;
+      }
+
+      a {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        color: var(--nav-color);
+        text-decoration: none;
+        position: relative;
+      }
+
+      a::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -2px; /* насколько низко от текста */
+        width: 0;
+        height: 1px;
+        background: currentColor;
+        transition: 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      a:hover::after {
+        width: 100%;
+      }
+    }
+
+    li:first-child a {
+      margin-left: -4px;
+    }
+  }
+}
