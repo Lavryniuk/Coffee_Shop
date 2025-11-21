@@ -1,4 +1,6 @@
 import React from "react";
+import { useState } from "react";
+import { useFetch } from "../../hooks/useFetch";
 import Header from "../../components/header/Header";
 import bgImage from "../../assets/img/coffeePage/coffeePageBG.jpg";
 import mainPhoto from "../../assets/img/coffeePage/coffeeMainPhoto.jpg";
@@ -8,6 +10,20 @@ import Footer from "../../components/footer/Footer";
 import "./coffeePage.scss";
 
 const CoffeePage = () => {
+  const [filteredCards, setFilteredCards] = useState([]);
+
+  const { data, loading, error } = useFetch("/db.json");
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const cards = data.cards;
+
+  const filterCards = (value) => {
+    const filtered = cards.filter((card) => card.country === value);
+    setFilteredCards(filtered);
+  };
+
   const title = "Our Coffee";
 
   const paragraph = `Extremity sweetness difficult behaviour he of. On disposal of as landlord horrible.
@@ -24,7 +40,7 @@ const CoffeePage = () => {
       <Section
         img={{ src: mainPhoto }}
         info={{
-          title: "Our Coffee",
+          title: title,
           paragraph: paragraph,
         }}
         options={{
@@ -45,14 +61,31 @@ const CoffeePage = () => {
         <div className="coffee_page_filter_right">
           <p className="coffee_page_filter_text">Or filter</p>
           <div className="coffee_page_filter_buttons">
-            <button className="coffee_page_filter_btn">Brazil</button>
-            <button className="coffee_page_filter_btn">Kenya</button>
-            <button className="coffee_page_filter_btn">Columbia</button>
+            <button
+              className="coffee_page_filter_btn"
+              onClick={() => filterCards("Brazil")}
+            >
+              Brazil
+            </button>
+            <button
+              className="coffee_page_filter_btn"
+              onClick={() => filterCards("Kenya")}
+            >
+              Kenya
+            </button>
+            <button
+              className="coffee_page_filter_btn"
+              onClick={() => filterCards("Columbia")}
+            >
+              Columbia
+            </button>
           </div>
         </div>
       </div>
 
-      <Cards />
+      <Cards
+        cardsToRender={filteredCards.length ? filteredCards : data.cards}
+      />
       <Footer />
     </div>
   );

@@ -1,13 +1,17 @@
 import React from "react";
+import { useFetch } from "../../hooks/useFetch";
 import HomeHeader from "../../components/homeHeader/HomeHeader";
 import Footer from "../../components/footer/Footer";
 import Divider from "../../components/divider/Divider";
+import Card from "../../components/card/Card";
 import "./homePage.scss";
-import coffee1 from "../../assets/img/mainPage/item1.png";
-import coffee2 from "../../assets/img/mainPage/item2.png";
-import coffee3 from "../../assets/img/mainPage/item3.png";
 
 function HomePage() {
+  const { data, loading, error } = useFetch("/db.json");
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <>
       <HomeHeader />
@@ -34,23 +38,17 @@ function HomePage() {
       <div className="home_best">
         <h2 className="home_best_title">Our best</h2>
         <div className="home_best_cards">
-          <div className="home_best_card">
-            <img src={coffee1} alt="Coffee 1" />
-            <h3 className="home_best_card_name">Solimo Coffee Beans 2 kg</h3>
-            <p className="home_best_card_price">$10.73</p>
-          </div>
-
-          <div className="home_best_card">
-            <img src={coffee2} alt="Coffee 2" />
-            <h3 className="home_best_card_name">Presto Coffee Beans 1 kg</h3>
-            <p className="home_best_card_price">$15.99</p>
-          </div>
-
-          <div className="home_best_card">
-            <img src={coffee3} alt="Coffee 3" />
-            <h3 className="home_best_card_name">AROMISTICO Coffee 1 kg</h3>
-            <p className="home_best_card_price">$6.99</p>
-          </div>
+          {data.cards.map((card, i) => (
+            <div className="home_best_card" key={card.id}>
+              <Card
+                id={card.id}
+                cardPhoto={card.img}
+                name={card.title}
+                price={card.price}
+                isBG={true}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
