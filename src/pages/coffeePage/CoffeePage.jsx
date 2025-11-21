@@ -12,7 +12,9 @@ import "./coffeePage.scss";
 const CoffeePage = () => {
   const [filteredCards, setFilteredCards] = useState([]);
 
-  const { data, loading, error } = useFetch("/db.json");
+  const { data, loading, error } = useFetch(
+    "https://coffee-mock-2.onrender.com/cards"
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;

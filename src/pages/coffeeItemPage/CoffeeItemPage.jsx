@@ -8,11 +8,13 @@ import bgImage from "../../assets/img/coffeePage/coffeePageBG.jpg";
 
 const CoffeeItemPage = () => {
   const { id } = useParams();
-  const { data, loading, error } = useFetch("/db.json");
+  const { data, loading, error } = useFetch(
+    "https://coffee-mock-2.onrender.com/cards"
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  const item = data.cards.find((card) => card.id === id);
+  const item = data.find((card) => card.id === id);
 
   if (!item) return <p>Item not found</p>;
 

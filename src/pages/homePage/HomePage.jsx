@@ -7,7 +7,9 @@ import Card from "../../components/card/Card";
 import "./homePage.scss";
 
 function HomePage() {
-  const { data, loading, error } = useFetch("/db.json");
+  const { data, loading, error } = useFetch(
+    "https://coffee-mock-2.onrender.com/cards"
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -38,7 +40,7 @@ function HomePage() {
       <div className="home_best">
         <h2 className="home_best_title">Our best</h2>
         <div className="home_best_cards">
-          {data.cards.map((card, i) => (
+          {data.slice(0, 3).map((card) => (
             <div className="home_best_card" key={card.id}>
               <Card
                 id={card.id}
