@@ -4,9 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/main.scss";
 import App from "./App";
 
+import ScrollToTop from "./components/scrollToTop/ScrollToTop";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <App />
     </BrowserRouter>
   </StrictMode>

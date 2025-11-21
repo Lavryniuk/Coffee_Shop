@@ -1,5 +1,6 @@
 .footer {
   margin-top: 30px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,6 +8,5 @@
 
   &_divider {
     margin-top: 10px;
-    margin-bottom: 20px;
   }
 }

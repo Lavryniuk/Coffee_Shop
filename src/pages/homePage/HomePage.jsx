@@ -13,7 +13,9 @@ function HomePage() {
       <HomeHeader />
       <div className="home_about">
         <h2 className="home_about_title">About Us</h2>
+
         <Divider color={"#000"} invertIcon={true} />
+
         <div className="home_about_text">
           Extremity sweetness difficult behaviour he of. On disposal of as
           landlord horrible. Afraid at highly months do things on at. Situation
@@ -51,6 +53,7 @@ function HomePage() {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );
