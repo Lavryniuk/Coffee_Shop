@@ -10,7 +10,8 @@ import Footer from "../../components/footer/Footer";
 import "./coffeePage.scss";
 
 const CoffeePage = () => {
-  const [filteredCards, setFilteredCards] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [countryFilter, setCountryFilter] = useState("all");
 
   const { data, loading, error } = useFetch(
     "https://coffee-mock-2.onrender.com/cards"
@@ -19,11 +20,24 @@ const CoffeePage = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  const cards = data.cards;
+  const cards = data;
 
-  const filterCards = (value) => {
-    const filtered = cards.filter((card) => card.country === value);
-    setFilteredCards(filtered);
+  const getFilteredCards = () => {
+    let filtered = [...cards];
+    if (countryFilter !== "all") {
+      filtered = filtered.filter((card) => card.country === countryFilter);
+    }
+    if (inputValue.trim() !== "") {
+      filtered = filtered.filter((card) =>
+        card.title.toLowerCase().includes(inputValue.toLowerCase())
+      );
+    }
+
+    return filtered;
+  };
+
+  const filterByInput = (value) => {
+    setInputValue(value);
   };
 
   const title = "Our Coffee";
@@ -57,6 +71,7 @@ const CoffeePage = () => {
           <input
             className="coffee_page_filter_input"
             placeholder="start typing here..."
+            onChange={(e) => filterByInput(e.target.value)}
           ></input>
         </div>
 
@@ -65,19 +80,25 @@ const CoffeePage = () => {
           <div className="coffee_page_filter_buttons">
             <button
               className="coffee_page_filter_btn"
-              onClick={() => filterCards("Brazil")}
+              onClick={() => setCountryFilter("all")}
+            >
+              All
+            </button>
+            <button
+              className="coffee_page_filter_btn"
+              onClick={() => setCountryFilter("Brazil")}
             >
               Brazil
             </button>
             <button
               className="coffee_page_filter_btn"
-              onClick={() => filterCards("Kenya")}
+              onClick={() => setCountryFilter("Kenya")}
             >
               Kenya
             </button>
             <button
               className="coffee_page_filter_btn"
-              onClick={() => filterCards("Columbia")}
+              onClick={() => setCountryFilter("Columbia")}
             >
               Columbia
             </button>
@@ -85,9 +106,7 @@ const CoffeePage = () => {
         </div>
       </div>
 
-      <Cards
-        cardsToRender={filteredCards.length ? filteredCards : data.cards}
-      />
+      <Cards cardsToRender={getFilteredCards()} />
       <Footer />
     </div>
   );

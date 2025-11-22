@@ -13,7 +13,8 @@ const Cards = ({ cardsToRender }) => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!cardsToShow.length) return <p>No cards to display</p>;
+  if (!cardsToShow.length)
+    return <p className="noCards">No cards to display</p>;
 
   return (
     <div className="cards">
