@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import Header from "../../components/header/Header";
 import bgImage from "../../assets/img/coffeePage/coffeePageBG.jpg";
@@ -12,10 +12,17 @@ import "./coffeePage.scss";
 const CoffeePage = () => {
   const [inputValue, setInputValue] = useState("");
   const [countryFilter, setCountryFilter] = useState("all");
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  const STEP = 3;
 
   const { data, loading, error } = useFetch(
     "https://coffee-mock-2.onrender.com/cards"
   );
+
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [countryFilter, inputValue]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -39,6 +46,16 @@ const CoffeePage = () => {
   const filterByInput = (value) => {
     setInputValue(value);
   };
+
+  const filteredCards = getFilteredCards();
+
+  const visibleCards = filteredCards.slice(0, visibleCount);
+
+  const loadMore = () => {
+    setVisibleCount((prev) => prev + STEP);
+  };
+
+  const hasMore = visibleCount < filteredCards.length;
 
   const title = "Our Coffee";
 
@@ -106,7 +123,18 @@ const CoffeePage = () => {
         </div>
       </div>
 
-      <Cards cardsToRender={getFilteredCards()} />
+      <div className="coffee_page_cards_wrapper">
+        <Cards cardsToRender={visibleCards} />
+
+        {hasMore && <div className="coffee_page_cards_overlay"></div>}
+      </div>
+
+      {hasMore && (
+        <button className="coffee_page_loadMore" onClick={loadMore}>
+          Load more
+        </button>
+      )}
+
       <Footer />
     </div>
   );
