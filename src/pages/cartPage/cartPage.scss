@@ -1,0 +1,231 @@
+.cart_page {
+  &_container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  &_top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  &_title {
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  &_items {
+    margin-top: 40px;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    column-gap: 70px;
+    justify-content: center;
+  }
+
+  &_item {
+    grid-column: 1/2;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 20px 2px rgba(0, 0, 0, 0.25);
+
+    &_img {
+      margin: auto 15px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 120px;
+
+      img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 4px 4px 20px 2px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    &_name {
+      margin: 15px 15px 15px 25px;
+    }
+
+    &_info {
+      width: 300px;
+      margin: auto 20px;
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+    }
+
+    &_delete {
+      margin: auto 0;
+      width: 40px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    &_counter {
+      display: flex;
+      margin: auto 0;
+    }
+
+    &_remove {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      background: #fff;
+      font-size: 16px;
+      border: 1px solid #000;
+      border-radius: 4px 0 0 4px;
+    }
+
+    &_quantity {
+      width: 50px;
+      height: 30px;
+      text-align: center;
+      border: 1px solid #000;
+    }
+
+    &_add {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      background: #fff;
+      font-size: 16px;
+      border: 1px solid #000;
+      border-radius: 0 4px 4px 0;
+    }
+
+    &_price {
+      width: 120px;
+      text-align: center;
+      margin: auto 0;
+    }
+  }
+
+  &_bottom {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &_btn {
+    font-family: "Merienda", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 120px;
+    height: 30px;
+    font-weight: 400;
+    font-size: 12px;
+    border: none;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: #000;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: 4px 4px 20px 2px rgba(0, 0, 0, 0.25);
+      z-index: -1;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+
+  &_total {
+    position: sticky;
+    top: 70px;
+    grid-column: 2/3;
+    grid-row: 1/3;
+    margin: 0 auto;
+    padding: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 24px;
+    border-radius: 4px;
+
+    box-shadow: 4px 4px 20px 2px rgba(0, 0, 0, 0.25);
+
+    &_divider {
+      display: block;
+      margin: 15px auto;
+      width: 240px;
+      height: 1px;
+      background-color: #000;
+    }
+
+    &_btn {
+      font-family: "Merienda", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+      width: 120px;
+      height: 30px;
+      font-weight: 400;
+      font-size: 12px;
+      border: none;
+      background: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      text-decoration: none;
+      color: #000;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        box-shadow: 4px 4px 20px 2px rgba(0, 0, 0, 0.25);
+        z-index: -1;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+
+    &_bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-self: end;
+    }
+  }
+}

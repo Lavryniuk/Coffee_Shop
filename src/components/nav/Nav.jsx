@@ -22,6 +22,9 @@ const Nav = ({ color = "#fff", invertLogo = false }) => {
         <li>
           <Link to="/goods">For your pleasure</Link>
         </li>
+        <li>
+          <Link to="/cart">Cart</Link>
+        </li>
       </ul>
     </nav>
   );

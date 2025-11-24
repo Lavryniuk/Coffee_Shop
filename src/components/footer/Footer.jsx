@@ -6,7 +6,7 @@ import "./footer.scss";
 const Footer = () => {
   return (
     <footer className="footer">
-      <Nav color="#000" invertLogo={true} position="static" />
+      <Nav color="#000" invertLogo={true} />
       <div className="footer_divider">
         <Divider color={"#000"} invertIcon={true} />
       </div>

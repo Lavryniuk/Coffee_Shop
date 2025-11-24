@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/header/Header";
 import Section from "../../components/section/Section";
 import Cards from "../../components/cards/Cards";
@@ -13,10 +13,17 @@ const CoffeePage = () => {
     "https://coffee-mock-2.onrender.com/cards"
   );
 
+  const [randomSix, setRandomSix] = React.useState([]);
+
+  useEffect(() => {
+    if (data) {
+      const result = [...data].sort(() => Math.random() - 0.5).slice(0, 6);
+      setRandomSix(result);
+    }
+  }, [data]);
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-
-  const cards = data ?? [];
 
   const paragraph = `Extremity sweetness difficult behaviour he of. On disposal of as landlord horrible.
 
@@ -42,7 +49,7 @@ const CoffeePage = () => {
         }}
       />
 
-      <Cards cardsToRender={cards} />
+      <Cards cardsToRender={randomSix} />
 
       <Footer />
     </div>
