@@ -5,12 +5,15 @@ import "./styles/main.scss";
 import App from "./App";
 
 import ScrollToTop from "./components/scrollToTop/ScrollToTop";
+import { CartProvider } from "./context/cartProvider/CartProvider";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <ScrollToTop />
-      <App />
+      <CartProvider>
+        <ScrollToTop />
+        <App />
+      </CartProvider>
     </BrowserRouter>
   </StrictMode>
 );
